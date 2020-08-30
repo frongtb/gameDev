@@ -2,7 +2,7 @@
 #include <iostream>
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(512, 512), "Avoid Bullet" , sf :: Style ::Close | sf :: Style ::Resize);
+	sf::RenderWindow window(sf::VideoMode(1080, 720), "Avoid Bullet" , sf :: Style ::Close | sf :: Style ::Resize);
 	sf::RectangleShape player(sf::Vector2f (100.0f,100.0f ));
 	player.setPosition(206.0f, 206.0f);
 	sf::Texture playerTexture;
