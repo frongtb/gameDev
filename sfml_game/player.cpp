@@ -6,9 +6,13 @@ int main()
 	sf::RectangleShape player(sf::Vector2f (100.0f,100.0f ));
 	player.setPosition(206.0f, 206.0f);
 	sf::Texture playerTexture;
-	playerTexture.loadFromFile("plane.png");
+	playerTexture.loadFromFile("playerplane.png");
 	player.setTexture(&playerTexture);
 	//player.setFillColor(sf::Color::Green);
+
+	sf::Vector2u textureSize = playerTexture.getSize();
+	textureSize.x /= 3;
+	textureSize.y /= 9;
 
 	while (window.isOpen())
 	{
