@@ -6,15 +6,15 @@ int main()
 	sf::RectangleShape player(sf::Vector2f (100.0f,100.0f ));
 	player.setPosition(206.0f, 206.0f);
 	sf::Texture playerTexture;
-	playerTexture.loadFromFile("spaceshipsprites.png");
+	playerTexture.loadFromFile("playerplane.png");
 	player.setTexture(&playerTexture);
 	//player.setFillColor(sf::Color::Green);
 
-	sf::Vector2u textureSize = playerTexture.getSize();
+	/*sf::Vector2u textureSize = playerTexture.getSize();
 	textureSize.x /= 3;
-	textureSize.y /= 3;
+	textureSize.y /= 3;*/
 
-	player.setTextureRect(sf::IntRect(textureSize.x *3,textureSize.y *3,textureSize.x,textureSize.y);
+	//player.setTextureRect(sf::IntRect(textureSize.x *3,textureSize.y *3,textureSize.x,textureSize);
 
 	while (window.isOpen())
 	{
@@ -42,6 +42,7 @@ int main()
 				window.close();
 			}
 		}
+		
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 		{
 			player.move(-0.1f,0.0f);
