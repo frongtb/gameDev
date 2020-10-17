@@ -1,68 +1,57 @@
-#include <SFML/Graphics.hpp>
-#include <iostream>
-int main()
+#include "Player.h"
+
+enum controls{ UP = 22, DOWN = 18, RIGHT = 3,LEFT = 0,SHOOT = 57 };
+
+Player::Player(Texture* texture, int UP , int DOWN , int RIGHT , int LEFT , int SHOOT)
+	:level(1), exp(0), expNext(100), HP(10), hpMax(10), damage(1), damageMax(2),
+	score(0)
 {
-	sf::RenderWindow window(sf::VideoMode(1080,720), "Avoid Bullet" , sf :: Style ::Close | sf :: Style ::Resize);
-	sf::RectangleShape player(sf::Vector2f (100.0f,100.0f ));
-	player.setPosition(206.0f, 206.0f);
-	sf::Texture playerTexture;
-	playerTexture.loadFromFile("playerplane.png");
-	player.setTexture(&playerTexture);
-	//player.setFillColor(sf::Color::Green);
+	this->texture = texture;
+	this->sprite.setTexture(*this->texture);
 
-	/*sf::Vector2u textureSize = playerTexture.getSize();
-	textureSize.x /= 3;
-	textureSize.y /= 3;*/
+	this->controls[controls::UP] = UP;
+	this->controls[controls::DOWN] = DOWN;
+	this->controls[controls::LEFT] = LEFT;
+	this->controls[controls::RIGHT] = RIGHT;
+	this->controls[controls::SHOOT] = SHOOT;
+	
+}
 
-	//player.setTextureRect(sf::IntRect(textureSize.x *3,textureSize.y *3,textureSize.x,textureSize);
+Player::~Player()
+{
 
-	while (window.isOpen())
+}
+
+void Player::Movement()
+{
+	if (sf::Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::UP])))
 	{
-		sf::Event evnt;
-		while (window.pollEvent(evnt))
-		{
-			switch (evnt.type)
-			{
-			case sf::Event::Closed:
-				window.close();
-				break;
-			case sf::Event::Resized:
-				//std::cout << "New window width: " << evnt.size.width << "New window height: " << evnt.size.height << std::endl;
-				printf("New window width: %i New window height: %i\n", evnt.size.width, evnt.size.height);
-				break;
-			case sf::Event::TextEntered:
-				if (evnt.text.unicode<128)
-				{
-					printf("%c", evnt.text.unicode);
-				}
-				
-			}
-			if (evnt.type == evnt.Closed)
-			{
-				window.close();
-			}
-		}
-		
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-		{
-			player.move(-0.1f,0.0f);
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-		{
-			player.move(0.0f, -0.1f);
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-		{
-			player.move(0.1f, 0.0f);
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-		{
-			player.move(0.0f, 0.1f);
-		}
-		window.clear();
-		window.draw(player);
-		window.display();
+		std::cout << "W" << "\n";
 	}
+	if (sf::Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::DOWN])))
+	{
+		std::cout << "S" << "\n";
+	}
+	if (sf::Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::LEFT])))
+	{
+		std::cout << "A" << "\n";
+	}
+	if (sf::Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::RIGHT])))
+	{
+		std::cout << "D" << "\n";
+	}
+	if (sf::Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::SHOOT])))
+	{
+		std::cout << "SPACE" << "\n";
+	}
+}
 
-	return 0;
+void Player::Update()
+{
+	this->Movement();
+}
+
+void Player::Draw(RenderTarget &target)
+{
+	target.draw(this->sprite);
 }
